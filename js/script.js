@@ -24,3 +24,15 @@ pokemonList = [
 
 // Log the list to verify it works
 console.log(pokemonList);
+
+
+//for loop that iterates over each item in pokemonList
+for (let i = 0; i < pokemonList.length; i++) {
+  document.write(pokemonList[i].name + ' height is ' + pokemonList[i].height + '.<br>');
+
+
+}
+
+
+
+
