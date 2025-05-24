@@ -1,89 +1,106 @@
-
-
-//for each function instead of for each loop (prints the same as loop above)
-pokemonList.forEach(function(pokemon) {
-addListItem(pokemon);
-});
-
-
-// IIFE (Immediately Invoked Function Expression) to encapsulate all logic
+// IIFE (Immediately Invoked Function Expression) to encapsulate the module
 let pokemonRepository = (function () {
-  // Private array to store Pokémon data
+  // Private array to hold all Pokémon
   let pokemonList = [];
 
-  // Function to add a Pokémon to the list
+  // URL of the Pokémon API, requesting 150 Pokémon
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
+  // Adds a single Pokémon object to the list, if valid
   function add(pokemon) {
-    pokemonList.push(pokemon);
+    if (
+      typeof pokemon === "object" &&
+      "name" in pokemon
+    ) {
+      pokemonList.push(pokemon);
+    } else {
+      console.log("pokemon is not correct");
+    }
   }
 
-  // Function to return all Pokémon in the list
+  // Returns the full list of Pokémon
   function getAll() {
     return pokemonList;
   }
 
-  // Function to create and add a list item (button) for a Pokémon
+  // Creates and adds a button for a Pokémon to the DOM
   function addListItem(pokemon) {
-    // Select the <ul> element with the class 'pokemon-list'
-    let ul = document.querySelector('.pokemon-list');
+    // Selects the <ul> element with the class 'pokemon-list'
+    let pokemonList = document.querySelector(".pokemon-list");
 
-    // Create a new list item (<li>)
-    let listItem = document.createElement('li');
+    // Creates a <li> and a <button> element
+    let listpokemon = document.createElement("li");
+    let button = document.createElement("button");
 
-    // Create a button for the Pokémon
-    let button = document.createElement('button');
-    button.innerText = pokemon.name; // Set the button text to the Pokémon's name
+    // Sets the button text and style class
+    button.innerText = pokemon.name;
+    button.classList.add("button-class");
 
-    // Add a custom class to the button for styling
-    button.classList.add('pokemon-button');
+    // Adds the button to the list item, then adds the list item to the page
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
 
-    // Append the button to the list item
-    listItem.appendChild(button);
-
-    // Append the list item to the unordered list
-    ul.appendChild(listItem);
+    // Adds a click event to load and show Pokémon details
+    button.addEventListener("click", function () {
+      pokemonRepository.showDetails(pokemon);
+    });
   }
-  
-  // Function to show details of a Pokémon
-  button.addEventListener('click', function() {
-    showDetails(pokemon);
-  });
 
-  // Return only the public functions (everything else remains private)
+  // Loads the list of Pokémon (names and detail URLs) from the API
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json(); // Parse response into JSON
+    }).then(function (json) {
+      // For each Pokémon item, create an object and add it to the list
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+        console.log(pokemon); // Optional: log to verify loading
+      });
+    }).catch(function (e) {
+      console.error(e); // Handle fetch errors
+    });
+  }
+
+  // Loads additional details (image, height, types) for a specific Pokémon
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      // Adds new detail properties to the Pokémon object
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e); // Handle detail fetch errors
+    });
+  }
+
+  // Loads and logs Pokémon details to the console
+  function showDetails(item) {
+    pokemonRepository.loadDetails(item).then(function () {
+      console.log(item);
+    });
+  }
+
+  // Expose public methods
   return {
     add: add,
     getAll: getAll,
-    addListItem: addListItem
+    addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails: showDetails
   };
 })();
 
-//function to show details of a Pokémon
-function showDetails(pokemon) {
-  console.log(pokemon);
-}
-
-//addPokémon to the repository
-pokemonRepository.add({
-  name: 'Bulbasaur',
-  height: 7,
-  types: ['grass', 'poison']
-});
-pokemonRepository.add({
-  name: 'Charmander',
-  height: 6,
-  types: ['fire']
-});
-pokemonRepository.add({
-  name: 'Squirtle',
-  height: 5,
-  types: ['water']
-});
-pokemonRepository.add({
-  name: 'Pikachu',
-  height: 4,
-  types: ['electric']
-});
-
-// Loop through Pokémon and display them
-pokemonRepository.getAll().forEach(function(pokemon) {
-  pokemonRepository.addListItem(pokemon);
+// Load the Pokémon list and then display each one on the page
+pokemonRepository.loadList().then(function () {
+  pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
