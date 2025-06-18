@@ -106,4 +106,4 @@ pokemonRepository.loadList().then(function () {
 });
 
 
-//d
+//dd
