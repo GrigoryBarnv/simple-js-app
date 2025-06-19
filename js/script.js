@@ -106,6 +106,8 @@ pokemonRepository.loadList().then(function () {
 });
 
 
-//dss
+//ddss doss
+
+
 
 
