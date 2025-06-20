@@ -23,4 +23,7 @@ def polygon(t, n, length):
     angle = 360 / n
     for i in range(n):
         t.fd(length)
-        t.lt(angle)
+        t.lt(angle)\
+        
+
+polygon(bob, 7, 70)s
