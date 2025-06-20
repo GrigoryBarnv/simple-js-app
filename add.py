@@ -26,4 +26,4 @@ def polygon(t, n, length):
         t.lt(angle)\
         
 
-polygon(bob, 7, 70)sed
+polygon(bob, 7, 70)sedd
