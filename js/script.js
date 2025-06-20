@@ -107,7 +107,7 @@ pokemonRepository.loadList().then(function () {
 
 
 //ddss dossdddN
-ss
+sss
 
 
 
