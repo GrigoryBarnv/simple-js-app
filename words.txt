@@ -1,0 +1,12 @@
+apple
+banana
+cherry
+date
+fig
+grape
+melon
+orange
+peach
+pear
+plum
+
