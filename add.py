@@ -75,4 +75,4 @@ read_words('words.txt')
 
 
 def is_anagarm(word1, word2):
-    return sorted(word1) == sorted(word2)
+    return sorted(word1) == sorted(word2)dd
