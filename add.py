@@ -1,43 +1,21 @@
-fot = open('output.txt', 'w')
+import sys
 
+def sed(pattern, replacement, source, target):
+    try:
+        with open(source, 'r') as src_file, \
+             open(target, 'w') as tgt_file:
+            for line in src_file:
+                new_line = line.replace(pattern, replacement)
+                tgt_file.write(new_line)
 
-line1 = "this is a new line \n"
-fot.write(line1)
-line2 = "this is a new line \n"
-fot.write(line2)
-fot.close()
+    except IOError as e:
+        print(f"Error: {e}")
+        sys.exit(1)
 
-x = 52 
-fot.write(str(x))
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+        sys.exit(1)
 
-camels = 42
-fot.write('%d' % camels) # '%d' % camels
-
-'In %d years I have spotted %g %s.' % (3, 0.1, 'camels')
-
-import os
-cwd = os.getcwd()
-print("Current working directory: {0}".format(cwd))
-
-
-os.path.abspath('words.txt')
-
-os.path.exists('words.txt')
-
-os.path.isdir('words.txt')
-
-os.path.isdir('/mnt/c/Users')
-
-os.path.isfile('words.txt')
-
-os.listdir('.')
-
-def walk(dirname):
-    for name in os.listdir(dirname):
-        path = os.path.join(dirname, name)
-        if os.path.isfile(path):
-            print(path)
-        elif os.path.isdir(path):
-            walk(path)
-
-walk('.')
+if __name__ == '__main__':
+    
+                
