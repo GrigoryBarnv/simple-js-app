@@ -1,68 +1,28 @@
-class Time:
- """Represents the time of day.
- attributes: hour, minute, second
- """
-    def __init__(self, hour=0, minute=0, second=0):
-        self.hour = hour
-        self.minute = minute
-        self.second = second
+class Card:
+    """Represents a standard playing card."""
 
-time = Time()
-time.hour = 11
-time.minute = 59
-time.second = 45
+    # Class attributes (shared by all instances)
+    suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
+    rank_names = [None, 'Ace', '2', '3', '4', '5', '6', '7',
+                  '8', '9', '10', 'Jack', 'Queen', 'King']
 
+    def __init__(self, suit=0, rank=2):
+        self.suit = suit
+        self.rank = rank
 
-def add_time(t1, t2):
-    sum = Time()
-    sum.hour = t1.hour + t2.hour
-    sum.minute = t1.minute + t2.minute
-    sum.second = t1.second + t2.second
-    return sum
+    def __str__(self):
+        return '%s of %s' % (
+            Card.rank_names[self.rank],
+            Card.suit_names[self.suit])
 
 
+# Create card instances
+card1 = Card(2, 11)  # Jack of Hearts
+card2 = Card(3, 12)  # Queen of Spades
+queen_of_diamonds = Card(1, 12)  # Queen of Diamonds
 
-start = Time()
-start.hour = 9
-start.minute = 45
-start.second = 0
-
-duration = Time()
-duration.hour = 1
-duration.minute = 35
-duration.second = 0
-
-
-def print_time(t):
-    print('%.2d:%.2d:%.2d' % (t.hour, t.minute, t.second))
-
-
-
-done = add_time(start, duration)
-print_time(done)
-
-def add_time(t1, t2):
-    sum = Time()
-    sum.hour = t1.hour + t2.hour
-    sum.minute = t1.minute + t2.minute
-    sum.second = t1.second + t2.second
-
-    if sum.second >= 60:
-        sum.minute += 1
-        sum.second -= 60
-
-    if sum.minute >= 60:
-        sum.hour += 1
-        sum.minute -= 60
-
-
-def time_to_int(time):
-    minutes = time.hour * 60 + time.minute
-    seconds = minutes * 60 + time.second
-    return seconds
-
-def int_to_time(seconds):
-    time = Time()
-    minutes, time.second = divmod(seconds, 60)
-    time.hour, time.minute = divmod(minutes, 60)
-    return time
+# Compare cards
+if card1.rank > card2.rank:
+    print("Card 1 is higher.")
+else:
+    print("Card 2 is higher.")
