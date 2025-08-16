@@ -80,12 +80,20 @@ let pokemonRepository = (function () {
     });
   }
 
-  // Loads and logs Pokémon details to the console
+  // // Loads and logs Pokémon details to the console
+  // function showDetails(item) {
+  //   pokemonRepository.loadDetails(item).then(function () {
+  //     console.log(item);
+  //   });
+  // }
+
+// new one HEWRE FIXX!!!! 
   function showDetails(item) {
-    pokemonRepository.loadDetails(item).then(function () {
-      console.log(item);
-    });
+  loadDetails(item).then(function () {
+    showModal(item.name, `Height: ${item.height}`, item.imageUrl);
+  });
   }
+
 
   // Expose public methods
   return {
@@ -111,6 +119,67 @@ let container = document.querySelector('.container');
 container.innerHTML = '<button>Click me</button>';
 console.log(container);
 
+// TODODOTODOTO FIX !!!!!!! 
+//#########################################
+//#########################################
+// FROM HERE MAYBE I NEED TO USE IIFE - --- -- ----------- PUT IT ALL INSIDE THE IIFE ti has acces to everything nt th right order 
 
+//#########################################
+//#########################################
+let modalContainer = document.querySelector('#modal-container');
+
+function showModal(title, text, imgUrl) {
+  modalContainer.innerHTML ='';
+
+  let modal = document.createElement('div');
+  modal.classList.add('modal');
+
+  let closeButton = document.createElement('button');
+  closeButton.classList.add('modal-close');
+  closeButton.innerText = 'Close';
+  closeButton.addEventListener('click', hideModal);
+
+  let titleElement = document.createElement('h1');
+  titleElement.innerText = title;
+
+  let contentElement = document.createElement('p');
+  contentElement.innerText = text;
+
+  let imageElement = document.createElement('img');
+  imageElement.src = imgUrl;
+  imageElement.alt = title;
+
+  modal.appendChild(closeButton);
+  modal.appendChild(titleElement);
+  modal.appendChild(contentElement);
+  modal.appendChild(imageElement);
+
+  modalContainer.appendChild(modal);
+  modalContainer.classList.add('is-visible');
+  
+}
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+    hideModal();
+
+  }
+});
+
+
+
+modalContainer.addEventListener('click', (e) => {
+  if (e.target === modalContainer) {
+    hideModal();
+  }
+});
+
+
+function showDetails(item) {
+  pokemonRepository.loadDetails(item).then(function () {
+    showModal(item.name, `Height: ${item.height}`, item.imageUrl);
+
+  });
+}
 
 // STOPED ON 1.7 JSON 
