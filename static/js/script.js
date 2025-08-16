@@ -123,7 +123,7 @@ console.log(container);
 //#########################################
 //#########################################
 // FROM HERE MAYBE I NEED TO USE IIFE - --- -- ----------- PUT IT ALL INSIDE THE IIFE ti has acces to everything nt th right order 
-
+AND WATSCH ADDITIONAL MATERIAL !!!!
 //#########################################
 //#########################################
 let modalContainer = document.querySelector('#modal-container');
