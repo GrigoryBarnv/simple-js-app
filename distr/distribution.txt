@@ -1,0 +1,1 @@
+distribution folder for the minified js and css version of the project

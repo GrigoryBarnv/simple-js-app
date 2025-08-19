@@ -172,6 +172,7 @@ let pokemonRepository = (function () {
       hideModal();
     }
   });
+  
  */
 /*   // close modal when ESC pressed
   window.addEventListener('keydown', (e) => {
@@ -185,6 +186,7 @@ let pokemonRepository = (function () {
 
     // Clear modal body
     modalBody.innerHTML = "";
+    let msg = "Hello"; // ESLint will complain → should be 'Hello'
 
     // Set title
     modalTitle.innerText = pokemon.name;
