@@ -1,47 +1,28 @@
-.button-class {
-  background-color: #4caf50; /* Green */
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  background-color: white;
-  color: black;
-  border: 2px solid #4caf50;
-}
-
-#modal-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-#modal-container.is-visible {
-  display: flex;
-}
-
-.modal {
+/* Remove your .modal overrides! Instead style modal-content */
+.modal-content {
   background: white;
   border-radius: 8px;
   padding: 20px;
-  max-width: 400px;
   text-align: center;
+  max-width: 600px;   /* control width here */
+  margin: auto;       /* keeps content centered inside dialog */
 }
 
+.modal-content img {
+  max-width: 45%;
+  margin: 5px;
+}
 
-.modal img {
-  max-width: 100%;
-  height: auto;
+.modal-close {
+  float: right;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Make sure the dialog itself is centered horizontally */
+.modal-dialog {
+  margin: 1.75rem auto; /* auto ensures horizontal centering */
+  max-width: 600px;     /* optional: size control */
 }
