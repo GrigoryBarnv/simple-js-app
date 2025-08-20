@@ -180,6 +180,7 @@ let pokemonRepository = (function () {
       hideModal();
     }
   }) */;
+  
   function showModal(pokemon) {
     let modalTitle = document.querySelector(".modal-title");
     let modalBody = document.querySelector(".modal-body");
@@ -231,7 +232,6 @@ let pokemonRepository = (function () {
   }
 
 
-
   //creates an object with keys (add, getAll, etc...) to use PokemonReositry.getAll() for example 
   return {
     add,
@@ -240,7 +240,7 @@ let pokemonRepository = (function () {
     loadList,
     loadDetails,
     showDetails
-  }
+  };
 
 })();
 

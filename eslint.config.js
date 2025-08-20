@@ -1,18 +1,19 @@
 // eslint.config.js
 export default [
   {
-    files: ["**/*.js"],  // lint all JS files
+    files: ['**/*.js'],
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
+      ecmaVersion: 'latest',
+      sourceType: 'module',
       globals: {
-        window: "readonly",
-        document: "readonly"
+        window: 'readonly',
+        document: 'readonly'
       }
     },
     rules: {
-      quotes: ["error", "single"],   // enforce single quotes
-      semi: ["error", "always"]      // enforce semicolons
+      quotes: 'off', 
+      semi: ['error', 'always'], // Semikolons
+      'no-console': ['error', { allow: ['warn', 'error', 'info'] }] // nur console.log verbieten
     }
   }
 ];
