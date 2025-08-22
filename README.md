@@ -18,3 +18,5 @@ Built with **JavaScript, HTML, CSS**, and uses **Bootstrap** and **jQuery** for 
 - **PokéAPI** → data source  
 - **Polyfill.js** → browser compatibility  
 - **ESLint** → linting and error checking  
+
+2025
